@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/page2Style.css') }}">
+</head>
+<body>
+   <!-- <div></div>
+   <div id="navigate"> <button id="btnhome" onclick="history.back()">HOME</button> <object hspace="20"> </object><button id="btn1" onclick="seqDetails()">NOTE SEQUENCE INFO</button> <button id="btn2" onclick="evaluatedetails()">EVALUATION RESULT</button>
+   </div> -->
+<table style="width: 100%;"><tr>
+       <td style="width: 65%;"></td> 
+       <td><button id="btnhome" onclick="history.back()">HOME</button></td> 
+       <td><button id="btn1" onclick="seqDetails()">NOTE SEQUENCE INFO</button> 
+       <button id="btn2" onclick="evaluatedetails()">EVALUATION RESULT</button></td>
+</tr></table>
+
+    <center>
+        <font color='#45226c'> <h1 id="head1">EVALUATION RESULT</h1></font>
+    
+    <div id="resultSection">
+        <p type="text" name="refsource" id="refsource">{{ data.refsrc }}</p>
+        <p type="text" name="testsource" id="testsource" >{{ data.testsrc }}</p>
+     <div id="alignDetails"> 
+        <div id="div3"> 
+    <button id="btnShowNotime" onclick="shownoteTimeseq()">Show Note Time Sequence </button><button id="btnHideNotime" onclick="hidenoteTimeseq()">Hide Note Time Sequence</button>
+    <div id="showNoteTime">
+    <h2 id="secondHead">Note-Time sequence of inputs</h2>
+        <br>
+       
+        <div id="part21"> Reference Sequence</div> <p id="refseqpart">{{ data.refseq }}</p>
+        <br>
+        <div id="part22">Test Sequence </div><p>{{ data.testseq }}</p>
+        <br><br>
+    </div> 
+    <br>
+    <br>
+    <button id="btnShowAlignNotime" onclick="showAlignnoteTimeseq()">Show Aligned Note Time Sequence </button><button id="btnHideAlignNotime" onclick="hideAlignnoteTimeseq()">Hide Aligned Note Time Sequence</button>
+    <div id="showAlignNoteTime">
+        <h2 id="part23">Aligned Note-Time sequence </h2>
+        <div id="part24">Reference Note-Time Sequence</div> <p id="reftimeseq">{{ data.AlignedRefSeq }}</p>
+        <br>
+        <div id="part25">Test Note-Time Sequence</div> <p id="testtimeseq">{{ data.AlignedTestSeq }}</p>
+     </div>
+     <br>
+        <div id="reftimes">{{ data.timesref }}</div>
+        <div id="testtimes">{{ data.timestest }}</div>
+        
+            <br>
+        <button id="btnShowAlignNote" onclick="showAlignnoteseq()">Show Aligned Note Sequence </button><button id="btnHideAlignNote" onclick="hideAlignnoteseq()">Hide Aligned Note Sequence</button>
+        <div id="showAlignNote">
+        <h2 id="part26">Aligned Note sequence </h2>
+       
+        <div id="part27">Reference Sequence </div> <p id="refsequence">{{ data.refalignNotes }}</p>
+        <div id="newrf"></div>
+        <br>
+       <div id="part28">Test Sequence</div> <p id="testsequence"> {{ data.testalinNotes }}</p>
+       </div>
+      </div>
+     </div>
+    <div id="resultDetaildata">
+       <div id="container">
+       <div id="newts" style="overflow-x: auto;"> 
+       
+       </div>
+       <table style="height: 60px;"><tr><td ><div id='refalignplay'>  </div> </td> <td style="width: 20%;"> </td><td><div id='testalignplay'>  </div> </td></tr> </table> 
+       <br>
+        <div id="myhints"></div>
+    </div>
+        <h2 id="mark">
+        <label id="part29"><br> Match percentage </label> <label id="matchscore">{{ data.percentscore }}</label></h2>
+        </center>
+        <br>
+    </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='script/second.js') }}"></script>
+<script>
+     if(document.getElementById('refseqpart').innerText==""){
+        document.getElementById('secondHead').innerText="";
+        document.getElementById('part21').innerText="";
+        document.getElementById('part22').innerText="";
+        document.getElementById('part23').innerText="";
+        document.getElementById('part24').innerText="";
+        document.getElementById('part25').innerText="";
+        document.getElementById('part26').innerText="";
+        document.getElementById('part27').innerText="";
+        document.getElementById('part28').innerText="";
+        document.getElementById('part29').innerText="";
+        document.getElementById('btnShowNotime').style.display='none';
+        document.getElementById('btnHideNotime').style.display='none';
+        document.getElementById('btnShowAlignNotime').style.display='none';
+        document.getElementById('btnHideAlignNotime').style.display='none';
+        document.getElementById('btnShowAlignNote').style.display='none';
+        document.getElementById('btnHideAlignNote').style.display='none';
+        
+    }
+    else{
+        var reff=document.getElementById('reftimeseq').innerText;
+        var testt=document.getElementById('testtimeseq').innerText;
+        document.getElementById('showNoteTime').style.display='none';
+        document.getElementById('btnHideNotime').style.display='none';
+        document.getElementById('showAlignNoteTime').style.display='none';
+        document.getElementById('btnHideAlignNotime').style.display='none';
+        document.getElementById('showAlignNote').style.display='none';
+        document.getElementById('btnHideAlignNote').style.display='none';
+        // document.getElementById('refsequence').innerText="";
+        // document.getElementById('testsequence').innerText="";
+        document.getElementById('myhints').innerHTML=hintsOfColor();
+        resultPlay(reff,testt);
+    }
+    document.getElementById('refseqpart').addEventListener('change', async function() {
+        document.getElementById('secondHead').innerText="Note-Time sequence of inputs";
+        document.getElementById('part21').innerText="Reference Sequence";
+        document.getElementById('part22').innerText="Test Sequence";
+        document.getElementById('part23').innerText="Aligned Note-Time sequence";
+        document.getElementById('part24').innerText="Reference Note-Time Sequence";
+        document.getElementById('part25').innerText="Test Note-Time Sequence";
+        document.getElementById('part26').innerText="Aligned Note sequence";
+        document.getElementById('part27').innerText="Reference Sequence";
+        document.getElementById('part28').innerText="Test Sequence";
+        
+        document.getElementById('part29').innerText="Match percentage";
+        
+    });
+    var markarray=document.getElementById('matchscore').innerText.split(".");
+    document.getElementById('matchscore').innerText=markarray[0]+"."+markarray[1].substring(0,2)+"%";
+    document.getElementsByName("refsource")[0].style.visibility = "hidden";
+    document.getElementsByName("testsource")[0].style.visibility = "hidden";
+
+    // var resultsection=document.getElementById("result");
+    
+    document.getElementById("alignDetails") .style.display='none';
+    document.getElementById("btn2") .style.display='none';
+    function seqDetails(){
+       document.getElementById("resultDetaildata") .style.display='none';
+       document.getElementById("alignDetails") .style.display='inline';
+       document.getElementById("btn1") .style.display='none';
+       document.getElementById("btn2") .style.display='inline';
+       document.getElementById("head1") .innerText='NOTE SEQUENCE DATA OF INPUTS';
+       document.getElementById('showNoteTime').style.display='inline';
+        document.getElementById('btnShowNotime').style.display='none';
+        document.getElementById('btnHideNotime').style.display='inline';
+       
+    }
+  function evaluatedetails()
+    {
+       document.getElementById("resultDetaildata") .style.display='inline';
+       document.getElementById("alignDetails") .style.display='none';
+       document.getElementById("btn2") .style.display='none';
+       document.getElementById("btn1") .style.display='inline';
+       document.getElementById("head1") .innerText='EVALUATION RESULT';
+    }
+
+</script>
+</html>

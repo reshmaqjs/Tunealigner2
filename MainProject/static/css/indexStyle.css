@@ -1,0 +1,188 @@
+body{
+    background-image: url("/static/files/homebackg.png");
+     font-size:large;
+
+     background-size: cover;
+}
+#div2{
+     /* height: 100%;  */
+     height:570px;
+    width: 70%;
+    font-size: 23px;
+    text-shadow: 0 0 3px #170122, 0 0 5px #170122,0 0 5px #170122,0 0 5px #170122;
+    /* background: linear-gradient(0deg, rgba(60,32,100,1) 5%, rgba(52,28,88,1) 16%, rgba(76,47,115,1) 17%, rgba(56,14,85,1) 20%, rgba(68,17,106,1) 52%, rgba(69,35,119,1) 54%, rgba(47,21,77,1) 55%, rgba(71,24,109,1) 59%, rgba(60,16,94,1) 89%); */
+    /* background:  #4e72c1;    */
+}    
+.cla1{
+    font-size: 26px;
+}
+#recordpart{
+    text-align: left;
+    height: 1px;
+    width: 70%;
+    white-space: nowrap;
+    font-size: 23px;
+    text-shadow: 0 0 3px #170122, 0 0 5px #170122,0 0 5px #170122,0 0 5px #170122;
+}
+#testpart{
+text-align: left;
+white-space: nowrap;
+background-color: rgba(71,24,109,1);
+border: 4px solid #a30eb7 ;
+margin-bottom: 4px;
+border-radius: 8px;
+}
+#refpart{
+text-align: left;
+white-space: nowrap;
+background-color: rgba(71,24,109,1);
+border: 4px solid #a30eb7 ;
+margin-bottom: 4px;
+border-radius: 8px;
+}
+#evalpart{
+    white-space: nowrap;
+    background-color: rgba(71,24,109,1);
+    border: 4px solid #a30eb7 ;
+    border-radius: 8px;
+}
+#divfirst{
+    width:42%;
+    /* height: 100%; */
+    float: left;
+    /* background:  #81a2e8; */
+}
+#divsecond{
+    width:58%;
+    /* height:100%; */
+    float:right;
+    /* background: #3fa972; */
+}
+
+#windowmain{
+    
+    width:80%;   
+    /* background: linear-gradient(0deg, rgba(12,51,63,1) 14%, rgba(26,17,69,1) 22%, rgba(30,9,70,1) 59%, rgba(12,51,63,1) 60%); */
+    font-size:22px;
+   
+}
+#mark{
+    color: rgb(119, 231, 178);
+    font-size:x-large;
+}
+#ti1{
+/* background-color: aquamarine;*/
+color: white;
+} 
+#ti2{
+/*background-color: bisque;*/
+color: white;
+}
+#rftable{
+column-width: 10ch;
+
+}
+#tstable{
+    column-width: 3ch;
+}
+
+#resultTable{
+    background-color:#0b0314 ;
+    white-space: nowrap;
+}
+
+
+
+#refplay{
+    background-image: url("/static/files/playbtn.png");
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+background-size: cover;
+}
+#testplay{
+    background-image: url("/static/files/playbtn.png");
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+background-size: cover;
+}
+
+#refplaystop{
+    background-image: url("/static/files/playstop.png");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+#testplaystop{
+    background-image: url("/static/files/playstop.png");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+
+/* style record buttons */
+#record-btn1{
+    background-image: url("/static/files/recordbtn.jpg");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+#record-btn2{
+    background-image: url("/static/files/recordbtn.jpg");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+#stop-btn1{
+    background-image: url("/static/files/recStop.png");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+#stop-btn2{
+    background-image: url("/static/files/recStop.png");
+    width: 50px;
+height: 50px;
+border-radius: 60%;
+background-size: cover;
+}
+
+#clear{
+    background-color:white;
+    color: #19082d ;
+    font-size: 20px;
+    border-radius:  12px;
+}
+#clear:hover{
+    background-color:rgb(188, 78, 239);
+    color: #19082d ;
+}
+
+#submit{
+    background-color:white;
+    color: #19082d ;
+    font-size: 20px;
+    border-radius:  12px;
+}
+#submit:hover{
+    background-color:rgb(188, 78, 239);
+    color: #19082d ;
+}
+
+#fil1{
+    text-shadow: 0 0 3px #170122, 0 0 5px #170122,0 0 5px #170122,0 0 5px #170122;
+    color: white;
+    font-size: 17px;
+}
+#fil2{
+    text-shadow: 0 0 3px #170122, 0 0 5px #170122,0 0 5px #170122,0 0 5px #170122;
+    color: white;
+    font-size: 17px;
+
+}

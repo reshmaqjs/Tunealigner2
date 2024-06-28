@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+
+    <center>
+        <font color='#3e145c'> <h1>TUNE ALIGNER</h1></font>
+    </center>
+    <center>
+        <div id="windowmain">
+       <br>
+
+       <div id="recordpart">
+       <br><br>
+        <table style="width: 100%;">                
+            <tr><td><br><br><br></td></tr>
+          <tr id="ti1"><td style="width:15%;"></td><td>Record<br><br><br></td><td><button id="record-btn1"></button><button id="stop-btn1" style="display: none;"></button> <br><br><br></td>
+            <td></td> <td style="width: 40%;"></td><td>  <br><br>  <button id="refplay"></button><button style="display: none;" id="refplaystop"></button></td><td style="width: 15%;"></td></tr>
+            <tr id="ti1"><td ></td></tr><tr><td></td></tr>
+            </table>
+          <br><br><br><br><br>
+            <table style="width: 100%;"> 
+            <tr id="ti2"><td style="width:15%;"></td><td>Record<br><br><br></td><td ><button id="record-btn2"></button> <button id="stop-btn2" style="display: none;"></button><br><br><br></td>
+            <td></td><td style="width: 40%;"></td><td><br><br>  <button id="testplay"></button><button style="display: none;" id="testplaystop"></button></td><td style="width: 15%;"></td></tr>
+            <tr id="ti2"><td ><br></td><td></td></tr>
+            <tr><td><br></td></tr>
+            <tr><td><br></td></tr>
+            <tr><td><br></td></tr>
+            <tr><td><br></td></tr>
+            <tr><td><br></td></tr>
+            <tr><td><br></td></tr>
+        
+        </table>
+        </div>
+
+      <div id="div2">     
+        <div id="formpart">
+    <form method="POST" enctype="multipart/form-data">
+        {{form.hidden_tag()}} 
+
+     <div id="refpart">
+
+      <label id="ti1" class="cla1">Reference Audio</label>
+      <br><br>
+      <table>
+        <tr id="ti1"><td colspan="3"></td></tr>
+
+        <tr id="ti1">
+        <td style="width:20%;"></td><td> Select File</td><td colspan="2"> {{form.file1()}}</td>
+         </tr><tr><td></td></tr><tr><td></td></tr>
+         <tr id="ti1"><td></td><td></td><td style="width: 16%;"></td><td>OR</td></tr>
+         <tr id="ti1">
+        <td></td><td><input type="text" name="refname" id="refname" size="5"> <br><br><br> 
+        </td>
+        </tr>
+    </table>
+   <br>
+     </div>
+
+
+     <div id="testpart">
+
+        <label id="ti2" class="cla1">Test Audio</label>
+        <br><br>
+        <table>
+            <tr id="ti2">
+           <td style="width:20%;"></td><td>Select File</td><td colspan="2">{{form.file2()}}</td>
+            </tr>
+            <tr><td></td></tr><tr><td></td></tr>
+            <tr id="ti2"><td></td><td></td><td style="width: 16%;"></td><td>OR</td></tr>
+            <tr id="ti2">
+           <td></td><td><input type="text" name="testname" id="testname" size="5"><br><br><br></td>
+            </tr>
+      </table> 
+    <br>
+       </div>
+
+       <div id="evalpart">    
+          <br>
+        <table style="width: 100%;">
+            <tr id="ti2"><td style="width: 33%;"></td><td style="width: 33%;"></td><td></td><td><button id="clear">Clear</button></td><td style="width: 6%;"></td><td> {{form.submit()}}</td></tr>
+            
+        </table>
+        <br>
+        </div>
+       
+    </form> 
+</div>  
+
+ </div>
+</div>
+</center>
+</body>
+<!-- <script type="text/javascript" src="{{ url_for('static', filename='script/inputs.js') }}"></script> -->
+<script>
+   
+
+    var submitfield = document.getElementById("submit");
+    var fileInputField1 = document.getElementById("fil1");
+    fileInputField1.accept = ".wav,.mp3";
+
+    var fileInputField2 = document.getElementById("fil2");
+    fileInputField2.accept = ".wav,.mp3";
+    var refplaybtn = document.getElementById("refplay");
+    var testplaybtn = document.getElementById("testplay");
+    var refplaystopbtn = document.getElementById("refplaystop");
+    var testplaystopbtn = document.getElementById("testplaystop");
+    const audio1 = new Audio();
+    const audio2 = new Audio();
+     
+
+    document.getElementsByName("refname")[0].style.visibility = "hidden";
+    document.getElementsByName("testname")[0].style.visibility = "hidden";
+
+    //play buttons control
+    refplaybtn.addEventListener('click', async () => {
+            refplaybtn.style.display = 'none';
+            refplaystopbtn.style.display = 'inline';
+            if (document.getElementsByName("refname")[0].value=='record'){
+                audio1.src="./static/files/refr1.wav";
+                audio1.play();
+                  }
+                  else{
+
+                    if (fileInputField1.files.length > 0) {
+                    var file = fileInputField1.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    audio1.src = e.target.result;
+                    audio1.play();
+                };
+                reader.readAsDataURL(file);
+            }
+                        
+                  }
+            
+        });
+    refplaystopbtn.addEventListener('click', async () => {
+            refplaybtn.style.display = 'inline';
+            refplaystopbtn.style.display = 'none';
+            audio1.pause();
+            audio1.currentTime = 0; // Reset audio to the beginning
+        });
+
+    testplaybtn.addEventListener('click', async () => {
+           testplaybtn.style.display = 'none';
+           testplaystopbtn.style.display = 'inline';
+           if (document.getElementsByName("testname")[0].value=='record'){
+            audio2.src="./static/files/testr1.wav";
+            audio2.play();
+            
+                  }
+                  else{
+                    if (fileInputField2.files.length > 0) {
+                    var file = fileInputField2.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    audio2.src = e.target.result;
+                    audio2.play();
+                    
+                };
+                reader.readAsDataURL(file);
+            }
+                        
+                  }
+           
+        });
+    testplaystopbtn.addEventListener('click', async () => {
+           testplaybtn.style.display = 'inline';
+           testplaystopbtn.style.display = 'none';
+           audio2.pause();
+            audio2.currentTime = 0; // Reset audio to the beginning
+        });
+
+   
+   submitfield.addEventListener('click', function(event) {
+    var refvals=document.getElementsByName("refname")[0].value;
+   var tesvals= document.getElementsByName("testname")[0].value;
+            if (refvals=="" || tesvals=="") {
+                event.preventDefault(); // Prevent form submission
+                alert('Please provide both inputs');
+            }
+           
+        });
+
+    fileInputField1.addEventListener('change', async function() {
+            document.getElementsByName("refname")[0].value = "file"; // Access the first element with name "refname"
+            await fetch('/savereftoaudio');
+        });
+
+        fileInputField2.addEventListener('change', async function() {
+            document.getElementsByName("testname")[0].value = "file"; // Access the first element with name "testname"
+            await fetch('/savetesttoaudio');
+        });
+
+    const recordBtn1 = document.getElementById('record-btn1');
+        const stopBtn1 = document.getElementById('stop-btn1');      
+
+       const recordBtn2 = document.getElementById('record-btn2');
+        const stopBtn2 = document.getElementById('stop-btn2');
+
+        let recording = false;
+
+        recordBtn1.addEventListener('click', async () => {
+            recordBtn1.disabled = true;
+            recordBtn1.style.display = 'none';
+            stopBtn1.style.display = 'inline';
+            recording = true;
+            document.getElementsByName("refname")[0].value="record";
+            // document.getElementsByName("refsource")[0].value="./static/files/refr1.wav";
+            const response = await fetch('/recordref');//, { method: 'POST' }
+            const filename = await response.text();
+            
+        });
+
+        stopBtn1.addEventListener('click', async () => {
+            recordBtn1.disabled = false;
+            stopBtn1.style.display = 'none';
+            recordBtn1.style.display = 'inline';
+            recording = false;
+            fileInputField1.value="";
+            await fetch('/stop');
+           // await fetch('/savereftoaudio');
+
+        });
+        recordBtn2.addEventListener('click', async () => {
+            recordBtn2.disabled = true;
+            stopBtn2.style.display = 'inline';
+            recordBtn2.style.display = 'none';
+            recording = true;
+            document.getElementsByName("testname")[0].value="record"
+            // document.getElementsByName("testsource")[0].value="./static/files/testr1.wav";
+            const response = await fetch('/recordtest');//, { method: 'POST' }
+            const filename = await response.text();
+        });
+
+        stopBtn2.addEventListener('click', async () => {
+            recordBtn2.disabled = false;
+            stopBtn2.style.display = 'none';
+            recordBtn2.style.display = 'inline';
+            recording = false;
+            fileInputField2.value="";
+            await fetch('/stop');
+            //await fetch('/savetesttoaudio');
+
+        });
+</script>
+</html>
